@@ -1,0 +1,820 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 01: Se&ntilde;ales en tiempo continuo</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-30"><meta name="DC.source" content="ASySPrac01LeonardoCueto.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 01: Se&ntilde;ales en tiempo continuo</h1><!--introduction--><p>Integrantes:</p><div><ol><li>Bernal Casas Hector Obed</li><li>Cueto Ch&aacute;vez Leonardo Daniel</li><li>Guti&eacute;rrez Alvirde Jos&eacute; Mart&iacute;n</li></ol></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos.</a></li><li><a href="#2">Introducci&oacute;n.</a></li><li><a href="#4">Problema 1. Lathi Secci&Atilde;&sup3;n 1.11.</a></li><li><a href="#22">Problema 2. Lathi Problema 1.2-2.</a></li><li><a href="#31">Problema 3. Lathi Problema 1.11-1.</a></li><li><a href="#32">Problema 4. Construir una Grafica.</a></li><li><a href="#33">Problema 5. Lathi Problema 1.11-3.</a></li><li><a href="#44">Problema 6. Construya una app.</a></li></ul></div><h2 id="1">Objetivos.</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de MATLAB</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas continuas</li><li>Transformaci&oacute;n de se&Atilde;&plusmn;ales continuas (escalamientos y traslaciones)</li><li>Calculo de energ&iacute;a y potencia de se&ntilde;ales continuas</li></ul></div><h2 id="2">Introducci&oacute;n.</h2><p>Se investigo como graficar con lenguaje Python y se desarrollo el problema 4 de esta pr&aacute;ctica con dicho lenguaje. Se puede consultar el c&oacute;digo de la solucion en &eacute;ste <a href="https://colab.research.google.com/drive/1v4wG4w3n1usIuME1ZK9EWR2vlwIltwuz?usp=sharing">enlace</a>.</p><p>La gr&aacute;fica resultante es la siguiente.</p><p><img vspace="5" hspace="5" src="Intro.png" alt=""> </p><h2 id="4">Problema 1. Lathi Secci&Atilde;&sup3;n 1.11.</h2><p>Para el problema 1 de la practica se reprodujo la secci&oacute;n 1.11 del libro "Linear Systems and Signals" de B.P. Lathi. Lathi, P. and Green, R., 2018. <i>Linear Systems And Signals</i>. 3rd ed. New York: Oxford University Press, pp.126-133.</p><p>Funciones an&oacute;nimas:</p><pre class="codeinput">f=@(t) exp(-t).*cos(2*pi*t);<span class="comment">% (Definir una funci&oacute;n an&oacute;nima)</span>
+</pre><p>Para evaluar la funci&oacute;n en un punto especifico escribimos</p><pre class="codeinput">t=0;f(t)
+</pre><pre class="codeoutput">
+ans =
+
+     1
+
+</pre><p>&Atilde;&sup3;</p><pre class="codeinput">f(0);
+</pre><p>Vectores:</p><pre class="codeinput">t=(-2:2); <span class="comment">%(Definir un vector)</span>
+f(t) <span class="comment">%(Evaluamos la funci&oacute;n en el vector)</span>
+</pre><pre class="codeoutput">
+ans =
+
+    7.3891    2.7183    1.0000    0.3679    0.1353
+
+</pre><p>Comando Plot:</p><pre class="codeinput">plot(t,f(t)); <span class="comment">%(Graficar una funci&oacute;n)</span>
+xlabel(<span class="string">"t"</span>); <span class="comment">%(Nombre del eje x)</span>
+ylabel(<span class="string">"f(t)"</span>); <span class="comment">%(Nombre del eje y)</span>
+grid; <span class="comment">%(Activa la cuadricula para la gr&aacute;fica)</span>
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_01.png" alt=""> <pre class="codeinput">t=(-2:0.01:2); <span class="comment">%(Vector con un incremento entre los elementos)</span>
+plot(t,f(t));
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"f(t)"</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_02.png" alt=""> <p>Operadores de Relaci&Atilde;&sup3;n y funci&Atilde;&sup3;n escalon:</p><pre class="codeinput">u=@(t)1.0.*(t&gt;=0); <span class="comment">%(Funci&Atilde;&sup3;n escalon)</span>
+t=(-2:2);
+plot(t,u(t));
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"u(t)"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_03.png" alt=""> <pre class="codeinput">u=@(t)1.0.*(t&gt;=0);
+t=(-2:0.01:2);
+plot(t,u(t));
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"u(t)"</span>);
+axis([-2 2 -0.1 1.1]); <span class="comment">%(Determina el intervalo de los ejes)</span>
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_04.png" alt=""> <pre class="codeinput">p=@(t) 1.0.*((t&gt;=0)&amp;(t&lt;1)); <span class="comment">%(Funci&Atilde;&sup3;n definida con un operador AND(&amp;))</span>
+t=(-1:0.01:2);
+plot(t,p(t));
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"p(t)=u(t)-u(t-1)"</span>);
+axis([-1 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_05.png" alt=""> <p>Las funciones an&Atilde;&sup3;nimas tambien se pueden construir usando otras funciones an&Atilde;&sup3;nimas, El ejemplo anterior lo podemos escribir como una resta de la funci&Atilde;&sup3;n escalon.</p><pre class="codeinput">p=@(t) u(t)-u(t-1);
+t=(-1:0.01:2);
+plot(t,p(t));
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"p(t)=u(t)-u(t-1)"</span>);
+axis([-1 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_06.png" alt=""> <p>Operaciones en la variable independiente: Tenemos que</p><pre class="codeinput">f=@(t) exp(-t).*cos(2*pi*t);
+u=@(t)1.0.*(t&gt;=0);
+g=@(t) f(t).*u(t);
+t=(-2:0.01:2);
+plot(t,g(2*t+1)) <span class="comment">%(La funcion Tiene un escalamiento y una traslaci&Atilde;&sup3;n horizontal)</span>
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"g(2*t+1)"</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_07.png" alt=""> <pre class="codeinput">plot(t,g(-t+1))
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"g(-t+1)"</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_08.png" alt=""> <pre class="codeinput">plot(t,g(2*t+1)+g(-t+1))
+xlabel(<span class="string">"t"</span>);
+ylabel(<span class="string">"h(t)"</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_09.png" alt=""> <p>Integraci&Atilde;&sup3;n y Energia de una Se&Atilde;&plusmn;al:</p><pre class="codeinput">x=@(t) exp(-t).*((t&gt;=0)&amp;(t&lt;1));
+t=(0:0.01:1);
+E_x=sum(x(t).*x(t)*0.01) <span class="comment">%(M&Atilde;&copy;todo de aproximaci&Atilde;&sup3;n rectangular)</span>
+</pre><pre class="codeoutput">
+E_x =
+
+    0.4367
+
+</pre><pre class="codeinput">x_squared=@(t) x(t).*x(t);
+E_x=quad(x_squared,0,1) <span class="comment">%(Funci&Atilde;&sup3;n quad de MATLAB)</span>
+</pre><pre class="codeoutput">
+E_x =
+
+    0.4323
+
+</pre><p>Se pueden utilizar los mismos metodos para estimar la Energ&Atilde;&shy;a de se&Atilde;&plusmn;ales mas complejas.</p><pre class="codeinput">g_squared=@(t) g(t).*g(t);
+t=(0:0.001:100);
+E_g=sum(g_squared(t)*0.001)
+</pre><pre class="codeoutput">
+E_g =
+
+    0.2567
+
+</pre><pre class="codeinput">E_g=quad(g_squared,0,100)
+</pre><pre class="codeoutput">
+E_g =
+
+    0.2562
+
+</pre><h2 id="22">Problema 2. Lathi Problema 1.2-2.</h2><p>Problema 1.2-2</p><div><ul><li>(a) x(t &acirc;&#710;&#8217;4)</li><li>(b) x(t/1.5)</li><li>(c) x(&acirc;&#710;&#8217;t)</li><li>(d) x(2t &acirc;&#710;&#8217;4)</li><li>(e) x(2&acirc;&#710;&#8217;t)</li></ul></div><p><img vspace="5" hspace="5" src="G_P122.png" alt=""> </p><p>Entonces sabemos que:</p><p><img vspace="5" hspace="5" src="V_P122.png" alt=""> </p><pre class="codeinput">clearvars;
+syms <span class="string">t</span>
+f=@(t) ((-t.*heaviside(t+4)).*heaviside(-t))+((t.*heaviside(-t+2)).*heaviside(t));
+t = -10:0.01:10;
+y = f(t);
+
+plot(t,y,<span class="string">"r"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-5,3])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(t)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(t)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_10.png" alt=""> <p><b>(a)</b></p><pre class="codeinput">plot(t,f(t-4),<span class="string">"green"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-2,8])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(t-4)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(t-4)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_11.png" alt=""> <p><b>(b)</b></p><pre class="codeinput">plot(t,f(t/1.5),<span class="string">"yellow"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-8,5])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(t/1.5)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(t/1.5)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_12.png" alt=""> <p><b>(c)</b></p><pre class="codeinput">plot(t,f(-t),<span class="string">"blue"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-5,6])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(-t)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(-t)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_13.png" alt=""> <p><b>(d)</b></p><pre class="codeinput">plot(t,f(2.*t-4),<span class="string">"black"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-2,5])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(2t-4)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(2t-4)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_14.png" alt=""> <p><b>(e)</b></p><pre class="codeinput">plot(t,f(2-t),<span class="string">"c"</span>,<span class="string">"LineWidth"</span>,2)
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+xlim([-2,8])
+ylim([-1,5])
+title(<span class="string">"Grafica de la funci&Atilde;&sup3;n x(2-t)"</span>);
+xlabel(<span class="string">"t"</span>);
+legend({<span class="string">'x(2-t)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_15.png" alt=""> <h2 id="31">Problema 3. Lathi Problema 1.11-1.</h2><p>Problema 1.11-1</p><pre class="codeinput">x=-15:0.00001:15;
+x1=heaviside(x-pi);
+x2=heaviside(-x-pi);
+y1=(2.^-x).*cos(2*pi.*x).*x1;
+y2=(2.^x).*cos(2*pi.*-x).*x2;
+odd=(y1-y2)/2;
+
+plot(x,odd,<span class="string">'r-.'</span>,<span class="string">'LineWidth'</span>,2);
+grid <span class="string">on</span>;
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+ax.Box = <span class="string">'off'</span>;
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_16.png" alt=""> <h2 id="32">Problema 4. Construir una Grafica.</h2><p>Construye la grafica de</p><p><img src="ASySPrac01LeonardoCueto_eq13027217838343705306.png" alt="$$x(t) = \sum_{k=1}^{10} cos(2\pi k t)$$"></p><pre class="codeinput">t=-5:0.000001:5;
+s=0;
+n=10;
+<span class="keyword">for</span> i=1:n
+  s=s+cos(2*pi*i.*t);
+<span class="keyword">end</span>
+
+subplot(2,2,1)
+plot(t,s,<span class="string">'m'</span>)
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+axis([-5 0, 0, 11])
+
+subplot(2,2,2)
+plot(t,s,<span class="string">'m'</span>)
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+axis([0 5, 0, 11])
+
+subplot(2,2,3)
+plot(t,s,<span class="string">'m'</span>)
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+axis([-5 0, -4, 0])
+
+subplot(2,2,4)
+plot(t,s,<span class="string">'m'</span>)
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+axis([0 5, -4, 0])
+
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_17.png" alt=""> <h2 id="33">Problema 5. Lathi Problema 1.11-3.</h2><p>Define <img src="ASySPrac01LeonardoCueto_eq13371072340309245959.png" alt="$x(t) = e^{t(1-j2\pi)}u(-t)$"> y <img src="ASySPrac01LeonardoCueto_eq11322603607936323921.png" alt="$y(t) = re(2x\;\left(\frac{-5-t}{2}\right))$"></p><div><ul><li>(a) Use MATLAB to plot Re{x(t)} versus Im{x(at)} for a = 0.5, 1, and 2 and &acirc;&#710;&#8217;10 &acirc;&#8240;&curren; t &acirc;&#8240;&curren; 10. How important is the scale factor a on the shape of the resulting figure?</li><li>(b) Use MATLAB to plot y(t) over &acirc;&#710;&#8217;10 &acirc;&#8240;&curren; t &acirc;&#8240;&curren; 10. Analytically determine the time t0 where y(t) has a jump discontinuity. Verify your calculation of t0 using the plot of y(t).</li><li>(c) Use MATLAB and numerical integration to compute the energy Ex of signal x(t).</li><li>(d) Use MATLAB and numerical integration to compute the energy Ey of signal y(t).</li><li>(e) Use MATLAB to plot x(t) over &acirc;&#710;&#8217;10 &acirc;&#8240;&curren; t &acirc;&#8240;&curren; 10.</li></ul></div><p><b>(a)</b></p><pre class="codeinput">t = -10:0.01:10;
+sigma = 1;
+omega = 2*pi;
+s = sigma+omega*1i;
+x = exp(t.*s).*heaviside(-t);
+x_r= exp(t).*cos(2*pi.*t);
+x_i= (exp(t)).*sin(2*pi.*t);
+subplot(1,1,1);
+plot3(t,real(x),imag(x),<span class="string">"LineWidth"</span>,2)
+grid <span class="string">on</span>;
+xlabel(<span class="string">"Dominio t"</span>);
+ylabel(<span class="string">"Re"</span>);
+zlabel(<span class="string">"Im"</span>);
+title(<span class="string">"Grafica de la se&Atilde;&plusmn;al x(t)"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_18.png" alt=""> <pre class="codeinput">plot(x_r,x_i,<span class="string">"red"</span>,<span class="string">"LineWidth"</span>,2);
+<span class="comment">%Se puede graficar as&Atilde;&shy; o tambi&Atilde;&copy;n como:</span>
+<span class="comment">%plot(real(x),imag(x),"red","LineWidth",2);</span>
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+title(<span class="string">"Parte imaginaria y parte real"</span>);
+xlabel(<span class="string">"Re"</span>);
+ylabel(<span class="string">"Im"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_19.png" alt=""> <p>Para a = 0.5 tenemos :</p><pre class="codeinput">plot(real(x),imag(0.5*x),<span class="string">"green"</span>,<span class="string">"LineWidth"</span>,2);
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+title(<span class="string">"Parte imaginaria y parte real con a = 0.5"</span>);
+xlabel(<span class="string">"Re"</span>);
+ylabel(<span class="string">"Im"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_20.png" alt=""> <p>Para a = 1 tenemos:</p><pre class="codeinput">plot(real(x),imag(1.*x),<span class="string">"black"</span>,<span class="string">"LineWidth"</span>,2);
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+title(<span class="string">"Parte imaginaria y parte real con a = 1"</span>);
+xlabel(<span class="string">"Re"</span>);
+ylabel(<span class="string">"Im"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_21.png" alt=""> <p>Para a = 2 tenemos;</p><pre class="codeinput">plot(real(x),imag(2.*x),<span class="string">"yellow"</span>,<span class="string">"LineWidth"</span>,2);
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+title(<span class="string">"Parte imaginaria y parte real con a = 2"</span>);
+xlabel(<span class="string">"Re"</span>);
+ylabel(<span class="string">"Im"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_22.png" alt=""> <p>La importancia del factor de escalamiento es muy importante, ya que al aplicar &Atilde;&copy;ste, nuestra gr&Atilde;&iexcl;fica permite observar que la parte imaginaria tiene un aumento (o disminuci&Atilde;&sup3;n) exponencial frente a la parte real, por lo que dejar a &Atilde;&copy;ste factor de escalamiento de lado podr&Atilde;&shy;a causar resultados totalmente diferentes.</p><p><b>(b)</b></p><pre class="codeinput">clearvars;
+sigma = 1;
+omega = 2.*pi;
+s = sigma+omega*1i;
+x =@(t) exp(s.*t);
+t = -10:0.01:10;
+y = x(t);
+y_1 = 2*x((-5-t)/(2));
+plot(t,y_1,<span class="string">"green"</span>,<span class="string">"LineWidth"</span>, 2);
+plano = gca;
+plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>;
+plano.Box = <span class="string">"off"</span>;
+grid <span class="string">on</span>;
+title(<span class="string">"gr&Atilde;&iexcl;fica de y(t) con t E [-10,10]"</span>);
+xlim([-10,10])
+ylim([-15,15])
+</pre><pre class="codeoutput">Warning: Imaginary parts of complex X and/or Y arguments ignored 
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_23.png" alt=""> <p><b>(c)</b> Sabemos que la energ&Atilde;&shy;a de una se&Atilde;&plusmn;al est&Atilde;&iexcl; dada por :</p><p><img vspace="5" hspace="5" src="IntegralEfin.png" alt=""> </p><p>Esto para intervalos finitos, y para intervalos infinitos tenemos:</p><p><img vspace="5" hspace="5" src="IntegralEinf.png" alt=""> </p><p>Para definiar la energ&Atilde;&shy;a de la se&Atilde;&plusmn;al, teniendo en cuenta que nos piden varias veces en el ejercicio un intervalo [-10,10], y considerando que la se&Atilde;&plusmn;al &Atilde;&ordm;niacmente toma valores para los n&Atilde;&ordm;meros negativos por el u(-t), entonces podemos obtener la energ&Atilde;&shy;a con intervalos de integraci&Atilde;&sup3;n de (-10,0)</p><pre class="codeinput">x=@(t) exp(t.*(1+i*2*pi)).*heaviside(-t);
+x_squared=@(t)x(t).*x(t);
+Ex=integral(x_squared,-Inf,0)
+</pre><pre class="codeoutput">
+Ex =
+
+   0.0124 - 0.0776i
+
+</pre><p><b>(d)</b> Para definiar la energ&Atilde;&shy;a de la se&Atilde;&plusmn;al, teniendo en cuenta que nos piden varias veces en el ejercicio un intervalo [-10,10], y considerando que la se&Atilde;&plusmn;al &Atilde;&ordm;niacmente toma valores para los n&Atilde;&ordm;meros reales por ser la parte real, entonces podemos obtener la energ&Atilde;&shy;a con intervalos de integraci&Atilde;&sup3;n de (-10,10)</p><pre class="codeinput">y = @(t) real(2*x((-5-t)./2));
+y_squared=@(t) y(t).*y(t);
+Ey = integral(y_squared,-10,10)
+</pre><pre class="codeoutput">
+Ey =
+
+    2.0494
+
+</pre><p><b>(e)</b> Para t  [-10,10]</p><pre class="codeinput">clearvars;
+sigma = 1;
+omega = 2.*pi;
+s = sigma+omega*1i;
+t = -10:0.01:10;
+x = exp(s.*t).*heaviside(-t);
+plot3(t,real(x),imag(x),<span class="string">"LineWidth"</span>,2)
+grid <span class="string">on</span>;
+xlabel(<span class="string">"Dominio t"</span>);
+ylabel(<span class="string">"Re"</span>);
+zlabel(<span class="string">"Im"</span>);
+title(<span class="string">"Grafica de la se&Atilde;&plusmn;al x(t) para t E [-10,10]"</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac01LeonardoCueto_24.png" alt=""> <h2 id="44">Problema 6. Construya una app.</h2><p>Se desarrollo una app con el App Designer de Matlab, que permite graficar se&Atilde;&plusmn;ales reales en tiempo continuo, asi como definir el intervalo de la funci&Atilde;&sup3;n y asignarle traslaciones y escalamientos, tanto horizontales, como verticales. El archivo de la aplicaci&Atilde;&sup3;n se entrego junto al enlace de esta p&Atilde;&iexcl;gina. A continuacion se muestra una imagen de la aplicacion en funcionamiento.</p><p><img vspace="5" hspace="5" src="ImagenApp.png" alt=""> </p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 01: Señales en tiempo continuo
+%
+% Integrantes:
+%
+% # Bernal Casas Hector Obed
+% # Cueto Chávez Leonardo Daniel
+% # Gutiérrez Alvirde José Martín
+% 
+%% Objetivos.
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas continuas
+% * Transformación de seÃ±ales continuas (escalamientos y traslaciones)
+% * Calculo de energía y potencia de señales continuas
+%
+%% Introducción.
+% Se investigo como graficar con lenguaje Python y se desarrollo el 
+% problema 4 de esta práctica con dicho lenguaje. Se puede consultar el código 
+% de la solucion en éste
+% <https://colab.research.google.com/drive/1v4wG4w3n1usIuME1ZK9EWR2vlwIltwuz?usp=sharing
+% enlace>.
+%
+% La gráfica resultante es la siguiente.
+%%
+% 
+% <<Intro.png>>
+% 
+
+
+%% Problema 1. Lathi SecciÃ³n 1.11.
+% Para el problema 1 de la practica se reprodujo la sección 1.11 del libro
+% "Linear Systems and Signals" de B.P. Lathi.
+% Lathi, P. and Green, R., 2018. _Linear Systems And Signals_. 3rd ed. New
+% York: Oxford University Press, pp.126-133.
+%%
+% Funciones anónimas:
+f=@(t) exp(-t).*cos(2*pi*t);% (Definir una función anónima)
+%%
+% Para evaluar la función en un punto especifico escribimos
+t=0;f(t)
+%%
+% Ã³
+f(0);
+%%
+% Vectores:
+t=(-2:2); %(Definir un vector)
+f(t) %(Evaluamos la función en el vector)
+%%
+% Comando Plot:
+plot(t,f(t)); %(Graficar una función)
+xlabel("t"); %(Nombre del eje x)
+ylabel("f(t)"); %(Nombre del eje y)
+grid; %(Activa la cuadricula para la gráfica)
+%%
+t=(-2:0.01:2); %(Vector con un incremento entre los elementos)
+plot(t,f(t));
+xlabel("t");
+ylabel("f(t)");
+grid;
+%%
+% Operadores de RelaciÃ³n y funciÃ³n escalon:
+u=@(t)1.0.*(t>=0); %(FunciÃ³n escalon)
+t=(-2:2);
+plot(t,u(t));
+xlabel("t");
+ylabel("u(t)");
+%%
+u=@(t)1.0.*(t>=0);
+t=(-2:0.01:2);
+plot(t,u(t));
+xlabel("t");
+ylabel("u(t)");
+axis([-2 2 -0.1 1.1]); %(Determina el intervalo de los ejes)
+%%
+p=@(t) 1.0.*((t>=0)&(t<1)); %(FunciÃ³n definida con un operador AND(&))
+t=(-1:0.01:2);
+plot(t,p(t));
+xlabel("t");
+ylabel("p(t)=u(t)-u(t-1)");
+axis([-1 2 -0.1 1.1]);
+%%
+% Las funciones anÃ³nimas tambien se pueden construir usando otras funciones
+% anÃ³nimas, El ejemplo anterior lo podemos escribir como una resta de la
+% funciÃ³n escalon.
+p=@(t) u(t)-u(t-1);
+t=(-1:0.01:2);
+plot(t,p(t));
+xlabel("t");
+ylabel("p(t)=u(t)-u(t-1)");
+axis([-1 2 -0.1 1.1]);
+%%
+% Operaciones en la variable independiente:
+% Tenemos que
+f=@(t) exp(-t).*cos(2*pi*t);
+u=@(t)1.0.*(t>=0);
+g=@(t) f(t).*u(t);
+t=(-2:0.01:2);
+plot(t,g(2*t+1)) %(La funcion Tiene un escalamiento y una traslaciÃ³n horizontal)
+xlabel("t");
+ylabel("g(2*t+1)");
+grid;
+%%
+plot(t,g(-t+1))
+xlabel("t");
+ylabel("g(-t+1)");
+grid;
+%%
+plot(t,g(2*t+1)+g(-t+1))
+xlabel("t");
+ylabel("h(t)");
+grid;
+%%
+% IntegraciÃ³n y Energia de una SeÃ±al:
+x=@(t) exp(-t).*((t>=0)&(t<1));
+t=(0:0.01:1);
+E_x=sum(x(t).*x(t)*0.01) %(MÃ©todo de aproximaciÃ³n rectangular)
+%%
+x_squared=@(t) x(t).*x(t);
+E_x=quad(x_squared,0,1) %(FunciÃ³n quad de MATLAB)
+%%
+% Se pueden utilizar los mismos metodos para estimar la EnergÃ­a de seÃ±ales
+% mas complejas.
+g_squared=@(t) g(t).*g(t);
+t=(0:0.001:100);
+E_g=sum(g_squared(t)*0.001)
+%%
+E_g=quad(g_squared,0,100)
+%% Problema 2. Lathi Problema 1.2-2.
+% Problema 1.2-2
+%%
+% 
+% * (a) x(t âˆ’4)
+% * (b) x(t/1.5) 
+% * (c) x(âˆ’t) 
+% * (d) x(2t âˆ’4) 
+% * (e) x(2âˆ’t)
+%%
+% 
+% <<G_P122.png>>
+% 
+% Entonces sabemos que:
+%
+% <<V_P122.png>>
+%
+%% 
+clearvars;
+syms t
+f=@(t) ((-t.*heaviside(t+4)).*heaviside(-t))+((t.*heaviside(-t+2)).*heaviside(t));
+t = -10:0.01:10;
+y = f(t);
+
+plot(t,y,"r","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-5,3])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(t)");
+xlabel("t");
+legend({'x(t)'},'Location','southwest')
+%% 
+% *(a)*
+plot(t,f(t-4),"green","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-2,8])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(t-4)");
+xlabel("t");
+legend({'x(t-4)'},'Location','southwest')
+%% 
+% *(b)*
+plot(t,f(t/1.5),"yellow","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-8,5])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(t/1.5)");
+xlabel("t");
+legend({'x(t/1.5)'},'Location','southwest')
+%% 
+% *(c)*
+plot(t,f(-t),"blue","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-5,6])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(-t)");
+xlabel("t");
+legend({'x(-t)'},'Location','southwest')
+%% 
+% *(d)*
+plot(t,f(2.*t-4),"black","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-2,5])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(2t-4)");
+xlabel("t");
+legend({'x(2t-4)'},'Location','southwest')
+%% 
+% *(e)*
+plot(t,f(2-t),"c","LineWidth",2)
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+xlim([-2,8])
+ylim([-1,5])
+title("Grafica de la funciÃ³n x(2-t)");
+xlabel("t");
+legend({'x(2-t)'},'Location','southwest')
+%% Problema 3. Lathi Problema 1.11-1.
+%
+% Problema 1.11-1
+%
+x=-15:0.00001:15;
+x1=heaviside(x-pi);
+x2=heaviside(-x-pi);
+y1=(2.^-x).*cos(2*pi.*x).*x1;
+y2=(2.^x).*cos(2*pi.*-x).*x2;
+odd=(y1-y2)/2;
+
+plot(x,odd,'r-.','LineWidth',2);
+grid on;
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+ax.Box = 'off';
+%% Problema 4. Construir una Grafica.
+% Construye la grafica de
+%
+% $$x(t) = \sum_{k=1}^{10} cos(2\pi k t)$$ 
+%
+t=-5:0.000001:5;
+s=0;
+n=10;
+for i=1:n
+  s=s+cos(2*pi*i.*t);
+end
+
+subplot(2,2,1)
+plot(t,s,'m')
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+axis([-5 0, 0, 11])
+
+subplot(2,2,2)
+plot(t,s,'m')
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+axis([0 5, 0, 11])
+
+subplot(2,2,3)
+plot(t,s,'m')
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+axis([-5 0, -4, 0])
+
+subplot(2,2,4)
+plot(t,s,'m')
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+axis([0 5, -4, 0])
+
+%
+%% Problema 5. Lathi Problema 1.11-3.
+% Define $x(t) = e^{t(1-j2\pi)}u(-t)$ 
+% y $y(t) = re(2x\;\left(\frac{-5-t}{2}\right))$
+% 
+% * (a) Use MATLAB to plot Re{x(t)} versus Im{x(at)} for a = 0.5, 1, and 2 and âˆ’10 â‰¤ t â‰¤ 10. How important is the scale factor a on the shape of the resulting figure?
+% * (b) Use MATLAB to plot y(t) over âˆ’10 â‰¤ t â‰¤ 10. Analytically determine the time t0 where y(t) has a jump discontinuity. Verify your calculation of t0 using the plot of y(t). 
+% * (c) Use MATLAB and numerical integration to compute the energy Ex of signal x(t). 
+% * (d) Use MATLAB and numerical integration to compute the energy Ey of signal y(t).
+% * (e) Use MATLAB to plot x(t) over âˆ’10 â‰¤ t â‰¤ 10.
+%
+%
+%% 
+% *(a)*
+t = -10:0.01:10;
+sigma = 1; 
+omega = 2*pi;
+s = sigma+omega*1i;
+x = exp(t.*s).*heaviside(-t);
+x_r= exp(t).*cos(2*pi.*t); 
+x_i= (exp(t)).*sin(2*pi.*t);
+subplot(1,1,1);
+plot3(t,real(x),imag(x),"LineWidth",2)
+grid on; 
+xlabel("Dominio t");
+ylabel("Re");
+zlabel("Im");
+title("Grafica de la seÃ±al x(t)");
+%% 
+plot(x_r,x_i,"red","LineWidth",2);
+%Se puede graficar asÃ­ o tambiÃ©n como: 
+%plot(real(x),imag(x),"red","LineWidth",2);
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+title("Parte imaginaria y parte real");
+xlabel("Re");
+ylabel("Im");
+%% 
+% Para a = 0.5 tenemos :
+plot(real(x),imag(0.5*x),"green","LineWidth",2);
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+title("Parte imaginaria y parte real con a = 0.5");
+xlabel("Re");
+ylabel("Im");
+%% 
+% Para a = 1 tenemos: 
+plot(real(x),imag(1.*x),"black","LineWidth",2);
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+title("Parte imaginaria y parte real con a = 1");
+xlabel("Re");
+ylabel("Im");
+%% 
+% Para a = 2 tenemos; 
+plot(real(x),imag(2.*x),"yellow","LineWidth",2);
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+title("Parte imaginaria y parte real con a = 2");
+xlabel("Re");
+ylabel("Im");
+%% 
+% La importancia del factor de escalamiento es muy importante, ya que al
+% aplicar Ã©ste, nuestra grÃ¡fica permite observar que la parte imaginaria 
+% tiene un aumento (o disminuciÃ³n) exponencial frente a la parte real, por
+% lo que dejar a Ã©ste factor de escalamiento de lado podrÃ­a causar
+% resultados totalmente diferentes. 
+%% 
+% *(b)*
+clearvars; 
+sigma = 1;
+omega = 2.*pi;
+s = sigma+omega*1i;
+x =@(t) exp(s.*t);
+t = -10:0.01:10;
+y = x(t);
+y_1 = 2*x((-5-t)/(2));
+plot(t,y_1,"green","LineWidth", 2);
+plano = gca;
+plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin";
+plano.Box = "off";
+grid on;
+title("grÃ¡fica de y(t) con t E [-10,10]");
+xlim([-10,10])
+ylim([-15,15])
+%% 
+% *(c)*
+% Sabemos que la energÃ­a de una seÃ±al estÃ¡ dada por : 
+%
+% <<IntegralEfin.png>>
+%
+% Esto para intervalos finitos, y para intervalos infinitos tenemos: 
+%
+% <<IntegralEinf.png>>
+%
+% Para definiar la energÃ­a de la seÃ±al, teniendo en cuenta que nos piden
+% varias veces en el ejercicio un intervalo [-10,10], y considerando que la
+% seÃ±al Ãºniacmente toma valores para los nÃºmeros negativos por el u(-t),
+% entonces podemos obtener la energÃ­a con intervalos de integraciÃ³n de (-10,0)
+x=@(t) exp(t.*(1+i*2*pi)).*heaviside(-t);
+x_squared=@(t)x(t).*x(t);
+Ex=integral(x_squared,-Inf,0)
+%% 
+% *(d)*
+% Para definiar la energÃ­a de la seÃ±al, teniendo en cuenta que nos piden
+% varias veces en el ejercicio un intervalo [-10,10], y considerando que la
+% seÃ±al Ãºniacmente toma valores para los nÃºmeros reales por ser la parte
+% real, entonces podemos obtener la energÃ­a con intervalos de integraciÃ³n
+% de (-10,10)
+y = @(t) real(2*x((-5-t)./2));
+y_squared=@(t) y(t).*y(t);
+Ey = integral(y_squared,-10,10)
+
+%% 
+% *(e)*
+% Para t  [-10,10]
+clearvars;
+sigma = 1; 
+omega = 2.*pi;
+s = sigma+omega*1i;
+t = -10:0.01:10;
+x = exp(s.*t).*heaviside(-t); 
+plot3(t,real(x),imag(x),"LineWidth",2)
+grid on; 
+xlabel("Dominio t");
+ylabel("Re");
+zlabel("Im");
+title("Grafica de la seÃ±al x(t) para t E [-10,10]");
+%% Problema 6. Construya una app.
+% Se desarrollo una app con el App Designer de Matlab, que permite graficar
+% seÃ±ales reales en tiempo continuo, asi como definir el intervalo de la
+% funciÃ³n y asignarle traslaciones y escalamientos, tanto horizontales,
+% como verticales. El archivo de la aplicaciÃ³n se entrego junto al enlace
+% de esta pÃ¡gina. A continuacion se muestra una imagen de la aplicacion en
+% funcionamiento.
+%%
+% 
+% <<ImagenApp.png>>
+% 
+
+
+##### SOURCE END #####
+--></body></html>
