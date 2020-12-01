@@ -1,2 +1,2 @@
 # ASySPracticasCuetoChavez
-Practica 01 ASyS
+Practicas ASyS
