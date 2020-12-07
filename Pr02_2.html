@@ -1,0 +1,222 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>2. Resuelve el problema 3.2-7, tenga cuidado en los escalamientos horizontales.</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-06"><meta name="DC.source" content="Pr02_2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>2. Resuelve el problema 3.2-7, tenga cuidado en los escalamientos horizontales.</h1><pre class="codeinput"><span class="comment">% Se empieza por definir la funci&oacute;n para la se&ntilde;al x(n).</span>
+
+clearvars
+f = @(x) (x).*heaviside(4-x).*heaviside(x)+sinc(x-5);
+x = -15:15;
+y = f(x);
+f1 = @(x1) (x1).*heaviside(4-x1).*heaviside(x1)+sinc(x1-5);
+x1 = -6:3:22;
+w = f(x1);
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">% x(n).</span>
+subplot(4,2,1)
+stem(x,y,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'g'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-3,8]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(n)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(n)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">%  x(-n).</span>
+subplot(4,2,2)
+stem(x,f(-x),<span class="string">"r"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'g'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-8,3]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(-n)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(-n)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">%  x(n+6).</span>
+subplot(4,2,3)
+stem(x,f(x+6),<span class="string">"m"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'g'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-8,3]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(n+6)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(n+6)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">%  x(n-6).</span>
+subplot(4,2,4)
+stem(x,f(x-6),<span class="string">"k"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'c'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-1,13]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(n-6)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(n-6)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">% x(3n).</span>
+subplot(4,2,5)
+stem(x,f(3.*x),<span class="string">"r"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-2,10]); ylim([-5,10]); title(<span class="string">"Grafica de la funci&oacute;n x(3n)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(3n)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">% x(n/3).</span>
+subplot(4,2,6)
+stem(x1,f(x1/3),<span class="string">"b"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-5,20]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(n/3)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(n/3)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+
+<span class="comment">% Haciendo uso del subplot se da la indicaci&oacute;n para graficar a la se&ntilde;al</span>
+<span class="comment">% x(3-n).</span>
+subplot(4,2,7)
+stem(x,f(3-x),<span class="string">"r"</span>,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'m'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'c'</span>);
+plano = gca; plano.XAxisLocation = <span class="string">"origin"</span>;
+plano.YAxisLocation = <span class="string">"origin"</span>; plano.Box = <span class="string">"off"</span>; grid <span class="string">on</span>;
+xlim([-6,5]); ylim([-5,5]); title(<span class="string">"Grafica de la funci&oacute;n x(3-n)"</span>);
+xlabel(<span class="string">"n"</span>); legend({<span class="string">'x(3-n)'</span>},<span class="string">'Location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="Pr02_2_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%  2. Resuelve el problema 3.2-7, tenga cuidado en los escalamientos horizontales.
+  
+
+% Se empieza por definir la función para la señal x(n).
+
+clearvars 
+f = @(x) (x).*heaviside(4-x).*heaviside(x)+sinc(x-5);
+x = -15:15;
+y = f(x);
+f1 = @(x1) (x1).*heaviside(4-x1).*heaviside(x1)+sinc(x1-5);
+x1 = -6:3:22;
+w = f(x1);
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+% x(n).
+subplot(4,2,1)
+stem(x,y,'LineStyle','-.','MarkerFaceColor','r','MarkerEdgeColor','g');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-3,8]); ylim([-5,5]); title("Grafica de la función x(n)");
+xlabel("n"); legend({'x(n)'},'Location','southwest')
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+%  x(-n).
+subplot(4,2,2)
+stem(x,f(-x),"r",'LineStyle','-.','MarkerFaceColor','g','MarkerEdgeColor','k');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-8,3]); ylim([-5,5]); title("Grafica de la función x(-n)");
+xlabel("n"); legend({'x(-n)'},'Location','southwest')
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+%  x(n+6).
+subplot(4,2,3)
+stem(x,f(x+6),"m",'LineStyle','-.','MarkerFaceColor','k','MarkerEdgeColor','g');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-8,3]); ylim([-5,5]); title("Grafica de la función x(n+6)");
+xlabel("n"); legend({'x(n+6)'},'Location','southwest')
+
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+%  x(n-6).
+subplot(4,2,4)
+stem(x,f(x-6),"k",'LineStyle','-.','MarkerFaceColor','c','MarkerEdgeColor','m');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-1,13]); ylim([-5,5]); title("Grafica de la función x(n-6)");
+xlabel("n"); legend({'x(n-6)'},'Location','southwest')
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+% x(3n).
+subplot(4,2,5)
+stem(x,f(3.*x),"r",'LineStyle','-.','MarkerFaceColor','k','MarkerEdgeColor','k');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-2,10]); ylim([-5,10]); title("Grafica de la función x(3n)");
+xlabel("n"); legend({'x(3n)'},'Location','southwest')
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+% x(n/3).
+subplot(4,2,6)
+stem(x1,f(x1/3),"b",'LineStyle','-.','MarkerFaceColor','r','MarkerEdgeColor','m');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-5,20]); ylim([-5,5]); title("Grafica de la función x(n/3)");
+xlabel("n"); legend({'x(n/3)'},'Location','southwest')
+
+% Haciendo uso del subplot se da la indicación para graficar a la señal
+% x(3-n).
+subplot(4,2,7)
+stem(x,f(3-x),"r",'LineStyle','-.','MarkerFaceColor','m','MarkerEdgeColor','c');
+plano = gca; plano.XAxisLocation = "origin";
+plano.YAxisLocation = "origin"; plano.Box = "off"; grid on;
+xlim([-6,5]); ylim([-5,5]); title("Grafica de la función x(3-n)");
+xlabel("n"); legend({'x(3-n)'},'Location','southwest')
+
+##### SOURCE END #####
+--></body></html>
